@@ -10,25 +10,27 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     />
   </head>
-  <body>
-    <div class="container">
 
+  <body>
+
+    <div class="container">
+      
       <!-- Add Jumbotron to Header -->
-      <div class="jumbotron text-center">
-        <h1>Mission to Mars</h1>
+      <div class="jumbotron text-center" style="background-image: url('https://images.firstpost.com/wp-content/uploads/2019/04/Mars-atmosphere-1.jpg');">
+        <h1 style="color:DarkKhaki;">Mission to Mars</h1>
 
         <!-- Add a button to activate scraping script -->
-        <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        <p class="text-uppercase"><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
       </div>
 
 
       <!-- Add section for Mars News -->
-      <div class="row" id="mars-news">
-        <div class="col-md-12">
+      <div class="row" id="mars-news"> 
+        <div class="col-xs-18 col-md-12">
           <div class="media">
 
             <div class="media-body">
-              <h2>Latest Mars News</h2>
+              <h2 class= "text-info">Latest Mars News</h2>
               <h4 class="media-heading">{{ mars.news_title }}</h4>
               <p>{{ mars.news_paragraph }}</p>
             </div>
@@ -40,8 +42,8 @@
 
       <!-- Section for Featured Image and Facts table -->
       <div class="row" id="mars-featured-image">
-        <div class="col-md-8">
-          <h2>Featured Mars Image</h2>
+        <div class="col-xs-12 col-md-8">
+          <h2 class= "text-info">Featured Mars Image</h2>
           <img
             src="{{mars.featured_image }}"
             class="img-responsive"
@@ -49,12 +51,36 @@
           />
         </div>
         
-        <div class="col-md-4">
+        <div class="col-xs-6 col-md-4">
           <!-- Mars Facts -->
           <div class="row" id="mars-facts">
-            <h4>Mars Facts</h4>
+            <h2 class="text-center text-info">Mars Facts</h2>
             {{ mars.facts | safe }}
           </div>
+        </div>
+      </div>
+      
+      <!-- Section for Hemisphere Image and title -->
+      <div class="row" id="hemisphere-featured-image">
+        <div class=" col-xs-18 col-md-12">
+          <h2 class="text-center text-info">Mars Hemispheres</h2>
+            <!-- For Loop to get image and title -->
+            {% for hemisphere in mars.hemispheres %}
+              <div class="col-xs-5 col-md-3">
+                <div class="img-thumbnail">
+                  <a href="{{hemisphere.img_url}}" target=_blank>
+                     <img 
+                      src="{{hemisphere.img_url}}"
+                      class="img-responsive"
+                      alt="Responsive image"/>
+                      <div class="caption">
+                        <p>{{hemisphere.title}}</p>
+                      </div>
+                  </a>
+                </div> 
+              </div>
+            {%endfor%}
+                
         </div>
       </div>
     </div>
